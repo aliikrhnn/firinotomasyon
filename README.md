@@ -1,20 +1,48 @@
-ISPARTA UYGULAMALI BİLİMLER ÜNİVERSİTESİ -TEKNOLOJİ FAKÜLTESİ BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ
-2023-2024 GÜZ DÖNEMİ BLG-101 ALGORİTMA VE PROGRAMLAMAYA GİRİŞ DERSİ ÖDEV RAPORU
-Ad Soyad: Ali KARAHAN
-Numara: 2212721055
-Fırın otomasyon projesi
-aliikrhnn/firinotomasyon (github.com)
+# Oven Automation
 
-KONU: Bu proje bir ev tipi fırının açılması , durdurulması , ayarların yapılması ve o ayarların listelenmesi için yazılan kodları içerir.
+A console application in C++ that simulates the control panel of a domestic oven:
+start it, set temperature, timer, dish and fan mode, then read those settings back on a
+later run.
 
- 
+Written for BLG-101 *Introduction to Algorithms and Programming* at Isparta University
+of Applied Sciences, Faculty of Technology, Computer Engineering — first-year coursework
+from the 2023–2024 autumn term.
 
-Resim 1 : Proje açılış ekranı ana menü
-Resim 1’de görüldüğü gibi fırın otomasyon projesi için 2  seçenekli bir menü ile açılmaktadır.
+## What it does
 
-Resim 2 : Seçenek 1 seçildikten sonra çıkan ekranlar
-Resim 2’de görüldüğü gibi seçenek 1 seçildikten sonra ayar girme ekranı çıkmaktadır ve ayarlar girildikten sonra fırını durdurmak için seçenek çıkmaktadır.
+```
+1  Start the oven   →  enter temperature, time, dish, fan on/off  →  stop
+2  Show settings    →  read the last saved configuration back
+```
 
-Resim 3 : Seçenek 2 görüntüsü
-Resim 3 de görüldüğü gibi seçenek 2 seçildikten sonra girilen ayarlar gözükmektedir.
-  
+Settings are held in a `struct` and written to `firinayarlari.dat` with `fstream`, so
+they survive between runs. The interface loops on a menu until the user quits.
+
+## Concepts it covers
+
+- `struct` for grouping related fields
+- File I/O with `fstream` for persistence between sessions
+- `switch` / `do-while` menu loop
+- Unbuffered key input via `getche()`
+- Localisation with `setlocale` for Turkish output
+
+## Building it
+
+```bash
+g++ src/oven-automation.cpp -o oven-automation
+./oven-automation
+```
+
+> The source uses `<conio.h>`, which is MSVC/MinGW-specific — it builds on Windows out
+> of the box. On Linux or macOS, replace `getche()` with `std::cin >> secim` and drop the
+> `<conio.h>` include.
+
+## A note on keeping this here
+
+This is beginner coursework and I have deliberately not rewritten it. It is the earliest
+code in my account, and leaving it untouched next to what I build now is a more honest
+picture of the distance covered than quietly deleting it would be.
+
+## Licence
+
+MIT — see [LICENSE](LICENSE).
